@@ -1,5 +1,6 @@
 package com.many.miniproject1.user;
 
+import com.many.miniproject1._core.errors.exception.Exception401;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -180,7 +181,7 @@ public class UserController {
         User sessionUser = (User) session.getAttribute("sessionUser");
         if (sessionUser == null) {
             // sessionUser가 null인 경우, 로그인 페이지로 리다이렉트
-            return "/person/loginForm";
+            throw new Exception401("인증이 되지 않았어요. 로그인 해주세요");
         }
         User user = userRepository.findById(sessionUser.getId());
 
